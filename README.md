@@ -1,17 +1,31 @@
-# @unction/tempLate
+# @unction/reduceWithValueKey
+
 
 ![Tests][BADGE_TRAVIS]
 ![Stability][BADGE_STABILITY]
 ![Dependencies][BADGE_DEPENDENCY]
 
-> mixed -> mixed
+> (AccumulatedType -> ValueType -> KeyType -> AccumulatedType) -> InitialType -> IterableType -> AccumulatedType
 
-An example function.
+A pretty standard `reduceWithValueKey()`, but where the `𝑓()` is unary curries.
 
 ``` javascript
-tempLate(1) // 1
+reduceWithValueKey(
+  (accumulation) => (current) => (key) => `${accumulation}/${current}:${key}`
+)(
+  "~"
+)(
+  ["Users", "krainboltgreene", "Code"]
+)
 ```
 
-[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/tempLate.svg?maxAge=2592000&style=flat-square
+Which will return:
+
+``` javascript
+"~/Users:0/krainboltgreene:1/Code:2"
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/reduceWithValueKey.svg?maxAge=2592000&style=flat-square
+
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
-[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/tempLate.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/reduceWithValueKey.svg?maxAge=2592000&style=flat-square
