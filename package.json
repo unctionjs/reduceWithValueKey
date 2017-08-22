@@ -1,6 +1,6 @@
 {
   "name": "@unction/reducewithvaluekey",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "A curried reduce where you get access to both the value and they key",
   "keywords": [
     "unction",
