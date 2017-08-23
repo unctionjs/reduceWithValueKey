@@ -1,7 +1,7 @@
 {
   "name": "@unction/reducewithvaluekey",
   "version": "3.0.0",
-  "description": "A curried reduce where you get access to both the value and they key",
+  "description": "Reduces over a functor, providing the reducer with the value and key",
   "keywords": [
     "unction",
     "functional"
@@ -49,8 +49,8 @@
     "tap": "10.3.4"
   },
   "dependencies": {
-    "@unction/isarray": "1.0.5",
-    "@unction/isobject": "1.0.5"
+    "@unction/fromfunctortopairs": "1.0.0",
+    "@unction/type": "2.0.0"
   },
   "nyc": {
     "require": [

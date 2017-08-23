@@ -1,13 +1,12 @@
 # @unction/reduceWithValueKey
 
-
 ![Tests][BADGE_TRAVIS]
 ![Stability][BADGE_STABILITY]
 ![Dependencies][BADGE_DEPENDENCY]
 
-> (AccumulatedType -> ValueType -> KeyType -> AccumulatedType) -> InitialType -> IterableType -> AccumulatedType
+> ((ArrayType | ObjectType | SetType | MapType) => ValueType => (KeyType | void) => AccumulatedType) => mixed => IterableType => mixed
 
-A pretty standard `reduceWithValueKey()`, but where the `𝑓()` is unary curries.
+Reduces over a functor, providing the reducer with the value and key.
 
 ``` javascript
 reduceWithValueKey(
@@ -26,6 +25,5 @@ Which will return:
 ```
 
 [BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/reduceWithValueKey.svg?maxAge=2592000&style=flat-square
-
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
 [BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/reduceWithValueKey.svg?maxAge=2592000&style=flat-square
