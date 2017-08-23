@@ -18,6 +18,13 @@
   "repository": "github:unctionjs/tempLate",
   "bugs": "https://github.com/unctionjs/tempLate/issues",
   "main": "transpiled/source.js",
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
   "scripts": {
     "prepublishOnly": "npm run build",
     "prepare": "flow-typed install",
@@ -51,12 +58,5 @@
   "dependencies": {
     "@unction/fromfunctortopairs": "1.0.0",
     "@unction/type": "2.0.0"
-  },
-  "nyc": {
-    "require": [
-      "babel-register"
-    ],
-    "sourceMap": false,
-    "instrument": false
   }
 }
