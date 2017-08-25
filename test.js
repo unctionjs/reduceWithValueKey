@@ -79,7 +79,6 @@ test(({equal, end}) => {
   end()
 })
 
-
 test(({throws, end}) => {
   throws(
     () =>
@@ -94,6 +93,24 @@ test(({throws, end}) => {
         true
       ),
       "./a:aaa/b:bbb/c:ccc"
+  )
+
+  end()
+})
+
+test(({equal, end}) => {
+  equal(
+    reduceWithValueKey(
+      (accumulation) =>
+        (current) =>
+          (key) =>
+            `${accumulation}/${current}:${key}`
+    )(
+      "."
+    )(
+      "abc"
+    ),
+    "./a:0/b:1/c:2"
   )
 
   end()

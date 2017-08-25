@@ -4,7 +4,7 @@
 ![Stability][BADGE_STABILITY]
 ![Dependencies][BADGE_DEPENDENCY]
 
-> ((ArrayType | ObjectType | SetType | MapType) => ValueType => (KeyType | void) => AccumulatedType) => mixed => IterableType => mixed
+> (mixed => ValueType => (KeyType | void) => mixed) => mixed => FunctorType => mixed
 
 Reduces over a functor, providing the reducer with the value and key.
 

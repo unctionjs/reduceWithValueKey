@@ -3,44 +3,38 @@ import type from "@unction/type"
 import fromFunctorToPairs from "@unction/fromfunctortopairs"
 
 type ReducableIteratorType = ArrayType | ObjectType | SetType | MapType
+type PairFunctorType = Array<[?KeyType, ValueType]>
+
+const universalReduce = (unction: Function): Function =>
+  (initial: mixed): Function =>
+    (functor: PairFunctorType): mixed =>
+      functor.reduce(
+          (accumulated: mixed, [key, value]: [?KeyType, ValueType]): mixed =>
+            unction(accumulated)(value)(key),
+          initial
+        )
 
 const reduceMapping = {
-  Array: (unction: ArrayType => ValueType => number => mixed): Function =>
-    (initial: ArrayType): Function =>
+  Array: (unction: mixed => ValueType => number => mixed): Function =>
+    (initial: mixed): Function =>
       (array: ArrayType): mixed =>
-        fromFunctorToPairs(array)
-          .reduce(
-            (accumulated: ArrayType, [key, value]: [number, ValueType]): mixed =>
-              unction(accumulated)(value)(key),
-            initial
-          ),
-  Set: (unction: SetType => ValueType => KeyType => SetType): Function =>
-    (initial: SetType): Function =>
+        universalReduce(unction)(initial)(fromFunctorToPairs(array)),
+  Set: (unction: mixed => ValueType => void => SetType): Function =>
+    (initial: mixed): Function =>
       (set: SetType): mixed =>
-        fromFunctorToPairs(set)
-          .reduce(
-            (accumulated: SetType, [key, value]: [void, ValueType]): mixed =>
-              unction(accumulated)(value)(key),
-            initial
-          ),
-  Object: (unction: ObjectType => ValueType => KeyType => ObjectType): Function =>
-    (initial: ObjectType): Function =>
+        universalReduce(unction)(initial)(fromFunctorToPairs(set)),
+  Object: (unction: ObjectType => ValueType => string => ObjectType): Function =>
+    (initial: mixed): Function =>
       (object: ObjectType): mixed =>
-        fromFunctorToPairs(object)
-          .reduce(
-            (accumulated: ObjectType, [key, value]: [KeyType, ValueType]): mixed =>
-              unction(accumulated)(value)(key),
-            initial
-          ),
-  Map: (unction: MapType => ValueType => KeyType => MapType): Function =>
-    (initial: MapType): Function =>
+        universalReduce(unction)(initial)(fromFunctorToPairs(object)),
+  Map: (unction: mixed => ValueType => KeyType => MapType): Function =>
+    (initial: mixed): Function =>
       (map: MapType): mixed =>
-        fromFunctorToPairs(map)
-          .reduce(
-            (accumulated: MapType, [key, value]: [KeyType, ValueType]): mixed =>
-              unction(accumulated)(value)(key),
-            initial
-          ),
+        universalReduce(unction)(initial)(fromFunctorToPairs(map)),
+  String: (unction: mixed => ValueType => KeyType => string): Function =>
+    (initial: mixed): Function =>
+      (string: string): mixed =>
+        universalReduce(unction)(initial)(fromFunctorToPairs(string.split(""))),
 }
 
 export default function reduceWithValueKey (unction: ReducableIteratorType => ValueType => KeyType | void => mixed): Function {
