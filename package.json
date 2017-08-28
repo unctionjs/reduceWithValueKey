@@ -17,7 +17,7 @@
   "homepage": "https://github.com/unctionjs/tempLate#readme",
   "repository": "github:unctionjs/tempLate",
   "bugs": "https://github.com/unctionjs/tempLate/issues",
-  "main": "transpiled/source.js",
+  "main": "transpiled/index.js",
   "nyc": {
     "require": [
       "babel-register"
@@ -60,6 +60,5 @@
   "dependencies": {
     "@unction/fromfunctortopairs": "1.0.0",
     "@unction/type": "2.0.0"
-  },
-  "main": "transpiled/index.js"
+  }
 }
