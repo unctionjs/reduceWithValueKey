@@ -39,12 +39,12 @@ const reduceMapping = {
 
 export default function reduceWithValueKey (unction: ReducableIteratorType => ValueType => KeyType | void => mixed): Function {
   return function reduceWithValueKeyUnction (initial: mixed): Function {
-    return function reduceWithValueKeyUnctionInitial (iterable: ReducableIteratorType): mixed {
-      if (reduceMapping[type(iterable)]) {
-        return reduceMapping[type(iterable)](unction)(initial)(iterable)
+    return function reduceWithValueKeyUnctionInitial (functor: ReducableIteratorType): mixed {
+      if (reduceMapping[type(functor)]) {
+        return reduceMapping[type(functor)](unction)(initial)(functor)
       }
 
-      throw new Error(`reduceWithValueKey couldn't figure out how to reduce ${type(iterable)}`)
+      throw new Error(`reduceWithValueKey couldn't figure out how to reduce ${type(functor)}`)
     }
   }
 }
