@@ -60,5 +60,8 @@
   "dependencies": {
     "@unction/fromfunctortopairs": "1.1.0",
     "@unction/type": "2.0.0"
-  }
+  },
+  "files": [
+    "transpiled/index.js"
+  ]
 }
