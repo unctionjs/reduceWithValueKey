@@ -1,15 +1,17 @@
 /* eslint-disable flowtype/require-parameter-type, flowtype/require-return-type */
 import {test} from "tap"
+import xstream from "xstream"
+import streamSatisfies from "@unction/streamsatisfies"
 
 import reduceWithValueKey from "./index"
 
-test(({equal, end}) => {
+test("Array", ({equal, end}) => {
   equal(
     reduceWithValueKey(
       (accumulation) =>
-        (current) =>
+        (value) =>
           (key) =>
-            `${accumulation}/${current}:${key}`
+            `${accumulation}/${value}:${key}`
     )(
       "."
     )(
@@ -21,13 +23,13 @@ test(({equal, end}) => {
   end()
 })
 
-test(({equal, end}) => {
+test("Object", ({equal, end}) => {
   equal(
     reduceWithValueKey(
       (accumulation) =>
-        (current) =>
+        (value) =>
           (key) =>
-            `${accumulation}/${current}:${key}`
+            `${accumulation}/${value}:${key}`
     )(
       "."
     )(
@@ -43,13 +45,13 @@ test(({equal, end}) => {
   end()
 })
 
-test(({equal, end}) => {
+test("Set", ({equal, end}) => {
   equal(
     reduceWithValueKey(
       (accumulation) =>
-        (current) =>
+        (value) =>
           (key) =>
-            `${accumulation}/${current}:${key}`
+            `${accumulation}/${value}:${key}`
     )(
       "."
     )(
@@ -61,13 +63,13 @@ test(({equal, end}) => {
   end()
 })
 
-test(({equal, end}) => {
+test("Map", ({equal, end}) => {
   equal(
     reduceWithValueKey(
       (accumulation) =>
-        (current) =>
+        (value) =>
           (key) =>
-            `${accumulation}/${current}:${key}`
+            `${accumulation}/${value}:${key}`
     )(
       "."
     )(
@@ -79,38 +81,59 @@ test(({equal, end}) => {
   end()
 })
 
-test(({throws, end}) => {
-  throws(
-    () =>
-      reduceWithValueKey(
-        (accumulation) =>
-          (current) =>
-            (key) =>
-              `${accumulation}/${current}:${key}`
-      )(
-        "."
-      )(
-        true
-      ),
-      "./a:aaa/b:bbb/c:ccc"
+test("Stream", ({equal, end}) => {
+  streamSatisfies(
+    "'.'---'./a:null'---'./a:null/b:null'---'./a:null/b:null/c:null'---|"
+  )(
+    (given) => (expected) => equal(given, expected)
+  )(
+    () => () => end()
+  )(
+    reduceWithValueKey(
+      (accumulation) =>
+        (value) =>
+          (key) =>
+            `${accumulation}/${value}:${key}`
+    )(
+      "."
+    )(
+      xstream.fromArray(["a", "b", "c"])
+    )
   )
-
-  end()
 })
 
-test(({equal, end}) => {
+test("String", ({equal, end}) => {
   equal(
     reduceWithValueKey(
       (accumulation) =>
-        (current) =>
+        (value) =>
           (key) =>
-            `${accumulation}/${current}:${key}`
+            `${accumulation}/${value}:${key}`
     )(
       "."
     )(
       "abc"
     ),
     "./a:0/b:1/c:2"
+  )
+
+  end()
+})
+
+test("error", ({throws, end}) => {
+  throws(
+    () =>
+      reduceWithValueKey(
+        (accumulation) =>
+          (value) =>
+            (key) =>
+              `${accumulation}/${value}:${key}`
+      )(
+        "."
+      )(
+        true
+      ),
+      "./a:aaa/b:bbb/c:ccc"
   )
 
   end()
