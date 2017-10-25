@@ -35,7 +35,7 @@
     "watch": "chokidar './index.js' './test.js' --command 'npm run ci --silent'"
   },
   "devDependencies": {
-    "@unction/streamsatisfies": "3.4.0",
+    "@unction/streamsatisfies": "3.5.0",
     "babel-cli": "6.24.1",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
