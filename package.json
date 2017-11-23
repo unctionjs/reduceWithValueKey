@@ -59,8 +59,8 @@
     "xstream": "11.0.0"
   },
   "dependencies": {
-    "@unction/fromfunctortopairs": "1.9.0",
-    "@unction/type": "2.6.0"
+    "@unction/fromfunctortopairs": "1.11.0",
+    "@unction/type": "2.8.0"
   },
   "files": [
     "transpiled/index.js"
