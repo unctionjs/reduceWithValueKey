@@ -14,7 +14,7 @@ import type {MapKeyType} from "types"
 import type {ReducerFunctionType} from "types"
 import type {UnaryFunctionType} from "types"
 
-const arrayReduce = (unction: ReducerFunctionType): UnaryFunctionType =>
+const arrayReduce: UnaryFunctionType = (unction: ReducerFunctionType): UnaryFunctionType =>
   (initial: mixed): UnaryFunctionType =>
     (array: ArrayType): mixed =>
       array.reduce(
@@ -22,40 +22,31 @@ const arrayReduce = (unction: ReducerFunctionType): UnaryFunctionType =>
           unction(accumulated)(value)(key),
         initial
       )
-const setReduce = (unction: ReducerFunctionType): UnaryFunctionType =>
+const setReduce: UnaryFunctionType = (unction: ReducerFunctionType): UnaryFunctionType =>
   (initial: mixed): UnaryFunctionType =>
     (set: SetType): mixed =>
       fromFunctorToPairs(set).reduce(
-        (accumulated: mixed, [
-          key,
-          value]: [null, ValueType
-]): mixed =>
+        (accumulated: mixed, [key, value]: [null, ValueType]): mixed =>
           unction(accumulated)(value)(key),
         initial
       )
-const objectReduce = (unction: ReducerFunctionType): UnaryFunctionType =>
+const objectReduce: UnaryFunctionType = (unction: ReducerFunctionType): UnaryFunctionType =>
   (initial: mixed): UnaryFunctionType =>
     (object: ObjectType): mixed =>
       fromFunctorToPairs(object).reduce(
-        (accumulated: mixed, [
-          key,
-          value]: [ObjectKeyType, ValueType
-]): mixed =>
+        (accumulated: mixed, [key, value]: [ObjectKeyType, ValueType]): mixed =>
           unction(accumulated)(value)(key),
         initial
       )
-const mapReduce = (unction: ReducerFunctionType): UnaryFunctionType =>
+const mapReduce: UnaryFunctionType = (unction: ReducerFunctionType): UnaryFunctionType =>
   (initial: mixed): UnaryFunctionType =>
     (map: MapType): mixed =>
       fromFunctorToPairs(map).reduce(
-        (accumulated: mixed, [
-          key,
-          value]: [MapKeyType, ValueType
-]): mixed =>
+        (accumulated: mixed, [key, value]: [MapKeyType, ValueType]): mixed =>
           unction(accumulated)(value)(key),
         initial
       )
-const streamReduce = (unction: ReducerFunctionType): UnaryFunctionType =>
+const streamReduce: UnaryFunctionType = (unction: ReducerFunctionType): UnaryFunctionType =>
   (initial: mixed): UnaryFunctionType =>
     (stream: StreamType): mixed =>
       stream.fold(
@@ -63,14 +54,11 @@ const streamReduce = (unction: ReducerFunctionType): UnaryFunctionType =>
           unction(accumulated)(value)(null),
         initial
       )
-const stringReduce = (unction: ReducerFunctionType): UnaryFunctionType =>
+const stringReduce: UnaryFunctionType = (unction: ReducerFunctionType): UnaryFunctionType =>
   (initial: mixed): UnaryFunctionType =>
     (string: StringType): mixed =>
       fromFunctorToPairs(string.split("")).reduce(
-        (accumulated: mixed, [
-          key,
-          value]: [ArrayKeyType, StringType
-]): mixed =>
+        (accumulated: mixed, [key, value]: [ArrayKeyType, StringType]): mixed =>
           unction(accumulated)(value)(key),
         initial
       )
@@ -91,7 +79,8 @@ export default function reduceWithValueKey (reducer: ReduceFunctionType): UnaryF
         case "Map": {
           return mapReduce(reducer)(initial)(functor)
         }
-        case "Stream": {
+        case "Stream":
+        case "MemoryStream": {
           return streamReduce(reducer)(initial)(functor)
         }
         case "String": {

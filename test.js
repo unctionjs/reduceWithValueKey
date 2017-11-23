@@ -102,6 +102,27 @@ test("Stream", ({equal, end}) => {
   )
 })
 
+test("MemoryStream", ({equal, end}) => {
+  streamSatisfies(
+    "'.'---'./a:null'---'./a:null/b:null'---'./a:null/b:null/c:null'---|"
+  )(
+    (given) => (expected) => equal(given, expected)
+  )(
+    () => () => end()
+  )(
+    reduceWithValueKey(
+      (accumulation) =>
+        (value) =>
+          (key) =>
+            `${accumulation}/${value}:${key}`
+    )(
+      "."
+    )(
+      xstream.fromArray(["a", "b", "c"]).remember()
+    )
+  )
+})
+
 test("String", ({equal, end}) => {
   equal(
     reduceWithValueKey(
