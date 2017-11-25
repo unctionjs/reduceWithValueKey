@@ -83,7 +83,7 @@ test("Map", ({equal, end}) => {
 
 test("Stream", ({equal, end}) => {
   streamSatisfies(
-    "'.'---'./a:null'---'./a:null/b:null'---'./a:null/b:null/c:null'---|"
+    "'.'---'./a:undefined'---'./a:undefined/b:undefined'---'./a:undefined/b:undefined/c:undefined'---|"
   )(
     (given) => (expected) => equal(given, expected)
   )(
@@ -104,7 +104,7 @@ test("Stream", ({equal, end}) => {
 
 test("MemoryStream", ({equal, end}) => {
   streamSatisfies(
-    "'.'---'./a:null'---'./a:null/b:null'---'./a:null/b:null/c:null'---|"
+    "'.'---'./a:undefined'---'./a:undefined/b:undefined'---'./a:undefined/b:undefined/c:undefined'---|"
   )(
     (given) => (expected) => equal(given, expected)
   )(
