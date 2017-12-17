@@ -8,6 +8,7 @@ import type {ObjectKeyType} from "types"
 import type {MapKeyType} from "types"
 import type {ReducerFunctionType} from "types"
 import type {UnaryFunctionType} from "types"
+import type {StringType} from "types"
 
 export default function reduceWithValueKey (reducer: ReducerFunctionType): UnaryFunctionType {
   return function reduceWithValueKeyUnction (initial: mixed): UnaryFunctionType {
