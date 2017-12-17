@@ -1,16 +1,16 @@
 import type from "@unction/type"
 import fromFunctorToPairs from "@unction/fromfunctortopairs"
 
+import type {UnaryFunctionType} from "types"
+import type {StringType} from "types"
 import type {FunctorType} from "types"
 import type {ValueType} from "types"
 import type {ArrayKeyType} from "types"
 import type {ObjectKeyType} from "types"
 import type {MapKeyType} from "types"
-import type {ReducerFunctionType} from "types"
-import type {UnaryFunctionType} from "types"
-import type {StringType} from "types"
+import type {KeyType} from "types"
 
-export default function reduceWithValueKey (reducer: ReducerFunctionType): UnaryFunctionType {
+export default function reduceWithValueKey (reducer: mixed => ValueType => (KeyType | void) => mixed): UnaryFunctionType {
   return function reduceWithValueKeyUnction (initial: mixed): UnaryFunctionType {
     return function reduceWithValueKeyUnctionInitial (functor: FunctorType): mixed {
       switch (type(functor)) {
