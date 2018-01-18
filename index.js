@@ -1,4 +1,5 @@
 import type from "@unction/type"
+import {scan} from "most"
 import fromFunctorToPairs from "@unction/fromfunctortopairs"
 
 import type {UnaryFunctionType} from "types"
@@ -43,17 +44,11 @@ export default function reduceWithValueKey (reducer: mixed => ValueType => (KeyT
           )
         }
         case "Stream": {
-          return functor.fold(
+          return scan(
             (accumulated: mixed, value: ValueType): mixed =>
               reducer(accumulated)(value)(),
-            initial
-          )
-        }
-        case "MemoryStream": {
-          return functor.fold(
-            (accumulated: mixed, value: ValueType): mixed =>
-              reducer(accumulated)(value)(),
-            initial
+            initial,
+            functor
           )
         }
         case "String": {

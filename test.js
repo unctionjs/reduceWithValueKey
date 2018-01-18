@@ -1,6 +1,6 @@
 /* eslint-disable flowtype/require-parameter-type, flowtype/require-return-type */
 import {test} from "tap"
-import xstream from "xstream"
+import {from} from "most"
 import streamSatisfies from "@unction/streamsatisfies"
 
 import reduceWithValueKey from "./index"
@@ -81,34 +81,24 @@ test("Map", ({equal, end}) => {
   end()
 })
 
-test("Stream", ({equal, end}) => {
+test("Stream", ({equal, doesNotThrow, end}) => {
   streamSatisfies(
-    "'.'---'./a:undefined'---'./a:undefined/b:undefined'---'./a:undefined/b:undefined/c:undefined'---|"
+    [
+      ".",
+      "./a:undefined",
+      "./a:undefined/b:undefined",
+      "./a:undefined/b:undefined/c:undefined",
+    ]
   )(
     (given) => (expected) => equal(given, expected)
   )(
-    () => () => end()
+    doesNotThrow
   )(
-    reduceWithValueKey(
-      (accumulation) =>
-        (value) =>
-          (key) =>
-            `${accumulation}/${value}:${key}`
-    )(
-      "."
-    )(
-      xstream.fromArray(["a", "b", "c"])
-    )
-  )
-})
+    ({length}) => (size) => {
+      equal(length, size)
 
-test("MemoryStream", ({equal, end}) => {
-  streamSatisfies(
-    "'.'---'./a:undefined'---'./a:undefined/b:undefined'---'./a:undefined/b:undefined/c:undefined'---|"
-  )(
-    (given) => (expected) => equal(given, expected)
-  )(
-    () => () => end()
+      end()
+    }
   )(
     reduceWithValueKey(
       (accumulation) =>
@@ -118,7 +108,7 @@ test("MemoryStream", ({equal, end}) => {
     )(
       "."
     )(
-      xstream.fromArray(["a", "b", "c"]).remember()
+      from(["a", "b", "c"])
     )
   )
 })
@@ -154,7 +144,7 @@ test("error", ({throws, end}) => {
       )(
         true
       ),
-      "./a:aaa/b:bbb/c:ccc"
+    "./a:aaa/b:bbb/c:ccc"
   )
 
   end()

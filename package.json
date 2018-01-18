@@ -35,7 +35,7 @@
     "watch": "chokidar './index.js' './test.js' --command 'npm run ci --silent'"
   },
   "devDependencies": {
-    "@unction/streamsatisfies": "3.24.0",
+    "@unction/streamsatisfies": "5.0.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.3",
@@ -57,12 +57,12 @@
     "flow-bin": "0.61.0",
     "flow-typed": "2.2.3",
     "nyc": "11.3.0",
-    "tap": "11.0.0",
-    "xstream": "11.1.0"
+    "tap": "11.0.0"
   },
   "dependencies": {
     "@unction/fromfunctortopairs": "3.0.0",
-    "@unction/type": "3.0.0"
+    "@unction/type": "3.0.0",
+    "most": "1.7.2"
   },
   "files": [
     "transpiled/index.js"
