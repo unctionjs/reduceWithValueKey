@@ -59,7 +59,7 @@
     "jest": "23.0.0"
   },
   "dependencies": {
-    "@unction/fromfunctortopairs": "3.0.0",
+    "@unction/fromfunctortopairs": "4.0.0",
     "@unction/type": "3.0.0",
     "most": "1.7.2"
   },
