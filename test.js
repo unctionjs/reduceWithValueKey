@@ -1,9 +1,9 @@
 /* eslint-disable flowtype/require-return-type */
-import {test} from "tap"
-import {from} from "most"
-import streamSatisfies from "@unction/streamsatisfies"
+import {test} from "tap";
+import {from} from "most";
+import streamSatisfies from "@unction/streamsatisfies";
 
-import reduceWithValueKey from "./index"
+import reduceWithValueKey from "./index";
 
 test("Array", ({equal, end}) => {
   equal(
@@ -18,10 +18,10 @@ test("Array", ({equal, end}) => {
       ["a", "b", "c"]
     ),
     "./a:0/b:1/c:2"
-  )
+  );
 
-  end()
-})
+  end();
+});
 
 test("Object", ({equal, end}) => {
   equal(
@@ -40,10 +40,10 @@ test("Object", ({equal, end}) => {
       }
     ),
     "./a:aaa/b:bbb/c:ccc"
-  )
+  );
 
-  end()
-})
+  end();
+});
 
 test("Set", ({equal, end}) => {
   equal(
@@ -58,10 +58,10 @@ test("Set", ({equal, end}) => {
       new Set(["a", "b", "c"])
     ),
     "./a:undefined/b:undefined/c:undefined"
-  )
+  );
 
-  end()
-})
+  end();
+});
 
 test("Map", ({equal, end}) => {
   equal(
@@ -76,10 +76,10 @@ test("Map", ({equal, end}) => {
       new Map([["aaa", "a"], ["bbb", "b"], ["ccc", "c"]])
     ),
     "./a:aaa/b:bbb/c:ccc"
-  )
+  );
 
-  end()
-})
+  end();
+});
 
 test("Stream", ({equal, doesNotThrow, end}) => {
   streamSatisfies(
@@ -95,9 +95,9 @@ test("Stream", ({equal, doesNotThrow, end}) => {
     doesNotThrow
   )(
     ({length}) => (size) => {
-      equal(length, size)
+      equal(length, size);
 
-      end()
+      end();
     }
   )(
     reduceWithValueKey(
@@ -110,8 +110,8 @@ test("Stream", ({equal, doesNotThrow, end}) => {
     )(
       from(["a", "b", "c"])
     )
-  )
-})
+  );
+});
 
 test("String", ({equal, end}) => {
   equal(
@@ -126,10 +126,10 @@ test("String", ({equal, end}) => {
       "abc"
     ),
     "./a:0/b:1/c:2"
-  )
+  );
 
-  end()
-})
+  end();
+});
 
 test("error", ({throws, end}) => {
   throws(
@@ -145,7 +145,7 @@ test("error", ({throws, end}) => {
         true
       ),
     "./a:aaa/b:bbb/c:ccc"
-  )
+  );
 
-  end()
-})
+  end();
+});
