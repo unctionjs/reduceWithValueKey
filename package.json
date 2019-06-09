@@ -59,8 +59,8 @@
     "tap": "12.6.1"
   },
   "dependencies": {
-    "@unction/fromfunctortopairs": "5.1.0",
-    "@unction/type": "4.0.0",
+    "@unction/fromfunctortopairs": "5.2.0",
+    "@unction/type": "4.1.0",
     "core-js": "3.0.1",
     "most": "1.7.2"
   },
