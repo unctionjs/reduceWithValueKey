@@ -59,8 +59,8 @@
     "tap": "12.6.1"
   },
   "dependencies": {
-    "@unction/fromfunctortopairs": "5.5.0",
-    "@unction/type": "4.2.0",
+    "@unction/fromfunctortopairs": "5.6.0",
+    "@unction/type": "4.2.1",
     "most": "1.7.2"
   },
   "files": [
