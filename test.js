@@ -1,9 +1,9 @@
-/* eslint-disable flowtype/require-return-type */
+
 import {test} from "tap";
 import {from} from "most";
 import streamSatisfies from "@unction/streamsatisfies";
 
-import reduceWithValueKey from "./index";
+import reduceWithValueKey from "./";
 
 test("Array", ({equal, end}) => {
   equal(
