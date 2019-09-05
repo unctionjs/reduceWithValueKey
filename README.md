@@ -4,7 +4,7 @@
 ![Stability][BADGE_STABILITY]
 ![Dependencies][BADGE_DEPENDENCY]
 
-> (mixed => ValueType => (KeyType | void) => mixed) => mixed => FunctorType => mixed
+> ReducerFunctionType<A, B | D, C> => D => EnumerableType<A> => E
 
 Reduces over a functor, providing the reducer with the value and key.
 

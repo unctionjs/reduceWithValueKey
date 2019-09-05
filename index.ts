@@ -1,43 +1,39 @@
 import type from "@unction/type";
 import {scan} from "most";
 import fromFunctorToPairs from "@unction/fromfunctortopairs";
-export default function reduceWithValueKey (reducer) {
-  return function reduceWithValueKeyUnction (initial) {
-    return function reduceWithValueKeyUnctionInitial (functor) {
-      switch (type(functor)) {
-        case "Array":
-        {
-          return functor.reduce((accumulated, value, key) => reducer(accumulated)(value)(key), initial);
+import {ReducerFunctionType} from "./types";
+import {EnumerableType} from "./types";
+
+export default function reduceWithValueKey<A, B, C, D, E> (reducer: ReducerFunctionType<A, B | D, C>) {
+  return function reduceWithValueKeyUnction (initial: D) {
+    return function reduceWithValueKeyUnctionInitial (enumerable: EnumerableType<A>): E {
+      switch (type(enumerable)) {
+        case "Array": {
+          return enumerable.reduce((accumulated: A, value: B, key: C) => reducer(accumulated)(value)(key), initial);
         }
 
-        case "Object":
-        {
-          return fromFunctorToPairs(functor).reduce((accumulated, [key, value]) => reducer(accumulated)(value)(key), initial);
+        case "Object": {
+          return fromFunctorToPairs(enumerable).reduce((accumulated: A, [key, value]: [C, D]) => reducer(accumulated)(value)(key), initial);
         }
 
-        case "Set":
-        {
-          return fromFunctorToPairs(functor).reduce((accumulated, [, value]) => reducer(accumulated)(value)(), initial);
+        case "Set": {
+          return fromFunctorToPairs(enumerable).reduce((accumulated: A, [, value]: [C, D]) => reducer(accumulated)(value)(), initial);
         }
 
-        case "Map":
-        {
-          return fromFunctorToPairs(functor).reduce((accumulated, [key, value]) => reducer(accumulated)(value)(key), initial);
+        case "Map": {
+          return fromFunctorToPairs(enumerable).reduce((accumulated: A, [key, value]: [C, D]) => reducer(accumulated)(value)(key), initial);
         }
 
-        case "Stream":
-        {
-          return scan((accumulated, value) => reducer(accumulated)(value)(), initial, functor);
+        case "Stream": {
+          return scan((accumulated: A, value: B) => reducer(accumulated)(value)(), initial, enumerable);
         }
 
-        case "String":
-        {
-          return fromFunctorToPairs(functor.split("")).reduce((accumulated, [key, value]) => reducer(accumulated)(value)(key), initial);
+        case "String": {
+          return fromFunctorToPairs(enumerable.split("")).reduce((accumulated: A, [key, value]: [C, D]) => reducer(accumulated)(value)(key), initial);
         }
 
-        default:
-        {
-          throw new Error(`reduceWithValueKey couldn't figure out how to reduce ${type(functor)}`);
+        default: {
+          throw new Error(`reduceWithValueKey couldn't figure out how to reduce ${type(enumerable)}`);
         }
       }
     };
