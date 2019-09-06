@@ -2,7 +2,7 @@
 import {from} from "most";
 import streamSatisfies from "@unction/streamsatisfies";
 
-import reduceWithValueKey from "./index.ts";
+import reduceWithValueKey from "./index";
 
 test("Array", () => {
   expect(reduceWithValueKey(
