@@ -54,7 +54,7 @@
     "typescript": "3.5.1"
   },
   "dependencies": {
-    "@unction/fromfunctortopairs": "5.8.0",
+    "@unction/fromfunctortopairs": "5.9.0",
     "@unction/type": "5.0.1",
     "most": "1.7.2"
   },
