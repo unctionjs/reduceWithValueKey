@@ -1,6 +1,6 @@
 {
   "name": "@unction/reducewithvaluekey",
-  "version": "11.10.1",
+  "version": "11.11.0",
   "description": "Reduces over a functor, providing the reducer with the value and key",
   "keywords": [
     "unction",
