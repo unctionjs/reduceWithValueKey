@@ -2,11 +2,10 @@ import type from "@unction/type";
 import {scan} from "most";
 import fromFunctorToPairs from "@unction/fromfunctortopairs";
 import {ReducerFunctionType} from "./types";
-import {EnumerableType} from "./types";
 
 export default function reduceWithValueKey<A, B, C, D, E> (reducer: ReducerFunctionType<A, B | D, C>) {
   return function reduceWithValueKeyUnction (initial: D) {
-    return function reduceWithValueKeyUnctionInitial (enumerable: EnumerableType<A>): E {
+    return function reduceWithValueKeyUnctionInitial (enumerable: Array<A> | Set<A> | RecordType<unknown, A> | string): E {
       switch (type(enumerable)) {
         case "Array": {
           return enumerable.reduce((accumulated: A, value: B, key: C) => reducer(accumulated)(value)(key), initial);
