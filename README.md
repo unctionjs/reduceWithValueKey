@@ -4,7 +4,7 @@
 ![Stability][BADGE_STABILITY]
 ![Dependencies][BADGE_DEPENDENCY]
 
-> ReducerFunctionType<A, B | D, C> => D => Array<A> | Set<A> | RecordType<unknown, A> | string => E
+> ReducerFunctionType<A, B | D, C> => D => Array<A> | Set<A> | Record<string | number | symbol, B> | Map<B, A> | string => E
 
 Reduces over a functor, providing the reducer with the value and key.
 

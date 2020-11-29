@@ -5,7 +5,7 @@ import {ReducerFunctionType} from "./types";
 
 export default function reduceWithValueKey<A, B, C, D, E> (reducer: ReducerFunctionType<A, B | D, C>) {
   return function reduceWithValueKeyUnction (initial: D) {
-    return function reduceWithValueKeyUnctionInitial (enumerable: Array<A> | Set<A> | RecordType<unknown, A> | string): E {
+    return function reduceWithValueKeyUnctionInitial (enumerable: Array<A> | Set<A> | Record<string | number | symbol, B> | Map<B, A> | string): E {
       switch (type(enumerable)) {
         case "Array": {
           return enumerable.reduce((accumulated: A, value: B, key: C) => reducer(accumulated)(value)(key), initial);
